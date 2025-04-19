@@ -28,9 +28,9 @@ const EmployeeTable = () => {
   return (
     <div>
       <h1 className="p-2 font-semibold uppercase">Today's Attendance</h1>
-      <div className="overflow-x-auto relative m-12 sm:rounded-lg border border-gray-400">
+      <div className="overflow-x-auto relative m-12 sm:rounded-2xl">
         <table className="w-full text-sm text-left text-gray-500">
-          <thead className="text-xs text-gray-800 uppercase bg-blue-500">
+          <thead className="text-xs text-gray-800 uppercase bg-[#F6F6F6]">
             <tr>
               <th scope="col" className="py-3 px-6">
                 Name
@@ -78,7 +78,7 @@ const EmployeeTable = () => {
                     {employee.checkOutTime || "Not updated"}
                   </td>
                   <td
-                    className={`py-4 px-6 font-medium ${
+                    className={`py-4 px-6 font-medium flex gap-x-1.5 items-center ${
                       employee.status === "Present"
                         ? "text-green-500"
                         : employee.status === "CheckedIn"
@@ -86,6 +86,13 @@ const EmployeeTable = () => {
                         : "text-red-500"
                     } `}
                   >
+                    <div className={`h-1.5 w-1.5 rounded-full mt-0.5 ${
+                      employee.status === "Present"
+                        ? "bg-green-500"
+                        : employee.status === "CheckedIn"
+                        ? "bg-yellow-600"
+                        : "bg-red-500"
+                    }`} ></div>
                     {employee.status || "Not updated"}
                   </td>
                 </tr>

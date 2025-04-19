@@ -52,7 +52,7 @@ const Security = () => {
     <div className="p-3" >
     <h1 className="font-semibold uppercase" >Device Security</h1>
     </div>
-    <div className="min-h-screen bg-gray-50 px-4 mt-2">
+    <div className="h-[calc(100dvh-8rem)] bg-gray-50 px-4 mt-2">
           <h1 className="text-lg font-medium text-gray-800 text-center mb-6">
             <span className="font-semibold text-red-500">Note:</span> In case of a
             new mobile device or loss of the old one, this feature is used by the

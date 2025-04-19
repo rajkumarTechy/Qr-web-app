@@ -24,7 +24,7 @@ interface Recordprops {
 
 const Record = () => {
   const [recordData, setRecordData] = useState<Recordprops[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [Filteration, setFilteration] = useState<Recordprops[]>([]);
   const [searchName, setSearchName] = useState("");
 
@@ -42,11 +42,11 @@ const Record = () => {
       setRecordData(res.data);
       setFilteration(res.data);
       console.log(res.data);
+      setLoading(false);
     } catch (err) {
       console.log(err);
-    } finally {
       setLoading(false);
-    }
+    } 
   };
 
   const parseDDMMYYYY = (dateStr: string): Date => {
@@ -188,9 +188,9 @@ const Record = () => {
               <img width={500} height={500} src={nodata} />
             </div>
           ) : (
-            Filteration.map((record) => (
+            Filteration.map((record, index) => (
               <div
-                key={record._id}
+                key={index}
                 className={`rounded-xl bg-white relative shadow-lg border-l-4 ${
                   record.status === "Present"
                     ? "border-green-600"
