@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./Context/AuthContext";
 import { toast } from "react-toastify";
 import Logo from '../assets/Logo.png'
+import Btnspinner from "./Btnspinner";
 
 interface FormValues {
   email: string;
@@ -17,6 +18,7 @@ interface FormValues {
 const Login = () => {
   const [firstPassword, setFirstPassword] = useState(false);
   const [showPass, setShowPass] = useState({ pass: false, cpass: false });
+  const [loading, setLoading] = useState(false);
 
   const  { setIsLoggedIn, setName } = useAuth();
  
@@ -52,11 +54,12 @@ const Login = () => {
         toast.error(err.response?.data?.message);
       }
     } else {
+      setLoading(true);
       try {
         const res = await axios.post(`${API_BASE_URL}/users/admin/login`, {
           email: data.email,
           password: data.password,
-        });
+        }, {withCredentials: true});
         if (res.status === 201) {
           toast.success(res.data.message);
           navigate('dashboard');
@@ -66,6 +69,8 @@ const Login = () => {
       } catch (err: any) {
         console.log(err);
         toast.error(err.response?.data?.message || "Something went wrong");
+      } finally {
+        setLoading(false);
       }
     }
 
@@ -226,8 +231,9 @@ const Login = () => {
 
               <button
                 type="submit"
-                className="w-full text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
+                className="w-full flex justify-center items-center gap-x-2.5 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
               >
+                {loading ? (<Btnspinner/>) : '' }
                 {firstPassword ? "Set Password" : "Sign In"}
               </button>
             </form>

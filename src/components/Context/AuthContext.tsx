@@ -49,11 +49,11 @@ export default function AuthProvider({
         setIsLoggedInState(parsed);
         if (storedName) setAdminName(storedName);
 
-        if (!parsed) {
+        if (parsed === false) {
           navigate("/");
         }
       } else {
-        navigate("/dashboard");
+        navigate("dashboard");
       }
       setLoading(false);
     };

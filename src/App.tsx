@@ -8,6 +8,7 @@ import AuthProvider, { useAuth } from "./components/Context/AuthContext";
 import Unauthorized from "./components/Unauthorized";
 import Sidebar from "./components/Sidebar";
 import Security from "./components/Security";
+import EmployeeTable from "./components/EmployeeTable";
 
 // Wrapper for accessing Auth inside the provider
 const AppContent = () => {
@@ -25,6 +26,7 @@ const AppContent = () => {
           <Route path="/" element={<Login />} />
           <Route path="security" element={<Security/>}/>
           <Route path="unauthorized" element={<Unauthorized />} />
+          <Route path="todayattendance" element={<EmployeeTable/>}/>
         </Routes>
       </div>
     </>

@@ -6,14 +6,16 @@ import { RiBookShelfLine } from "react-icons/ri";
 import { IoLogOut } from "react-icons/io5";
 import { useAuth } from "./Context/AuthContext";
 import { MdOutlinePhonelinkLock } from "react-icons/md";
+import { IoTodaySharp } from "react-icons/io5";
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn, isOpen, setIsOpen } = useAuth();
+  const { isLoggedIn, setIsLoggedIn, isOpen, setIsOpen, setName } = useAuth();
 
   const handleLogout = () => {
     if (isLoggedIn) {
       setIsLoggedIn(false);
+      setName('')
     }
     navigate("/login");
   };
@@ -119,6 +121,31 @@ const Sidebar = () => {
         </NavLink>
 
         <NavLink
+          to="todayattendance"
+          className={({ isActive }) =>
+            `px-2 py-2 mb-2 rounded hover:bg-gray-100 flex items-center gap-x-3.5 text-[#5D7285] ${
+              isActive ? "bg-[#E9F5FE] font-semibold text-blue-500" : ""
+            }`
+          }
+        >
+          {({ isActive }) => (
+            <>
+              <div className="flex justify-center">
+              <IoTodaySharp color={isActive ? "#0C7FDA" : "#5D7285"} size={22} />
+              </div>
+              
+              <span
+                className={`whitespace-nowrap overflow-hidden transition-all duration-200 ${
+                  isOpen ? "opacity-100 ml-1" : "opacity-0 w-0 ml-0"
+                }`}
+              >
+                Today's Attendance
+              </span>
+            </>
+          )}
+        </NavLink>
+
+        <NavLink
           to="security"
           className={({ isActive }) =>
             `px-2 py-2 mb-2 rounded hover:bg-gray-100 flex items-center gap-x-3.5 text-[#5D7285] ${
@@ -142,6 +169,8 @@ const Sidebar = () => {
             </>
           )}
         </NavLink>
+
+
 
         {/* Spacer to push logout down */}
         <div className="flex-grow" />
